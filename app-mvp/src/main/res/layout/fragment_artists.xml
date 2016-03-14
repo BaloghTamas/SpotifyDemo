@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent"
+			  android:orientation="vertical">
+
+	<android.support.design.widget.TextInputLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:hint="Artist name">
+
+		<EditText
+			android:id="@+id/etArtist"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"/>
+	</android.support.design.widget.TextInputLayout>
+
+	<android.support.v4.widget.SwipeRefreshLayout
+		android:id="@+id/swipeRefreshLayoutArtists"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_below="@id/toolbar"
+		android:layout_weight="1"
+		android:background="#FFFFFF">
+
+		<android.support.v7.widget.RecyclerView
+			android:id="@+id/recyclerViewArtists"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"/>
+
+		<TextView
+			android:id="@+id/tvEmpty"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_below="@id/recyclerViewArtists"
+			android:gravity="center"
+			android:text="No data"/>
+
+	</android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

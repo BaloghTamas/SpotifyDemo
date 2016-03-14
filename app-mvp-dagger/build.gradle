@@ -1,0 +1,106 @@
+apply plugin: 'com.android.application'
+// Assists in working with annotation processors for Android Studio.
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+	compileSdkVersion 23
+	buildToolsVersion "23.0.2"
+
+	defaultConfig {
+		applicationId "hu.bme.aut.android.spotifydemo"
+		minSdkVersion 16
+		targetSdkVersion 23
+		versionCode 1
+		versionName "1.0"
+		testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+	}
+
+	signingConfigs {
+		debug {
+			storeFile file("../SpotifyDemo_debug.keystore")
+		}
+		release {
+			storeFile file("../SpotifyDemo.keystore")
+			storePassword "iOk45AsjHsFJiPwv0sa8xiOBlgjfiJZX"
+			keyAlias "SpotifyDemo"
+			keyPassword "zsQfBQwlRblZPXAo+SWacYs2CD7+C0iz"
+		}
+	}
+	buildTypes {
+		release {
+			minifyEnabled false
+			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+			signingConfig signingConfigs.release;
+		}
+		debug {
+			signingConfig signingConfigs.debug;
+		}
+	}
+	/*
+	MD5:  54:DC:D6:36:93:61:49:33:01:A9:EC:FC:EC:46:2A:81
+	SHA1: D7:A1:7D:45:51:A1:99:15:52:FB:D1:78:5A:7F:EB:77:B7:3D:5B:23
+	SHA256: 4A:0F:A9:7C:5D:52:C4:D9:FF:3D:D4:64:62:4D:B4:15:E4:39:01:11:59:27:39:F9:89:32:1A:EE:77:68:B7:F0
+	SHA1-BASE64: 16F9RVGhmRVS+9F4Wn/rd7c9WyM=
+	*/
+	packagingOptions {
+		exclude 'META-INF/services/javax.annotation.processing.Processor'
+		exclude 'META-INF/LICENSE.txt'
+		exclude 'META-INF/NOTICE.txt'
+	}
+}
+
+dependencies {
+	compile fileTree(dir: 'libs', include: ['*.jar'])
+	testCompile 'junit:junit:4.12'
+	compile 'com.android.support:appcompat-v7:23.1.1'
+	compile 'com.android.support:cardview-v7:23.1.1'
+	compile 'com.android.support:design:23.1.1'
+	compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
+	compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
+	compile 'com.google.code.gson:gson:2.4'
+	compile 'com.github.bumptech.glide:glide:3.7.0'
+	compile 'org.greenrobot:eventbus:3.0.0'
+	compile 'com.jakewharton:butterknife:7.0.1'
+
+	// Dagger 2 and Compiler
+	compile "com.google.dagger:dagger-compiler:2.0.1"
+	compile 'com.google.dagger:dagger:2.0.1'
+	apt "com.google.dagger:dagger-compiler:2.0.1"
+	// Required for @Generated annotation (missing in Java <= 1.6; therefore, Android)
+	provided 'javax.annotation:jsr250-api:1.0'
+
+	//JVM Test
+	//JUnit
+	testCompile 'junit:junit:4.12'
+
+	//Robolectric
+	testCompile('org.robolectric:shadows-support-v4:3.0-rc3') {
+		exclude group: 'commons-logging', module: 'commons-logging'
+		exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+	}
+
+	//Mockito
+	testCompile "org.mockito:mockito-core:1.10.19"
+
+	//Dagger
+	testCompile 'com.google.dagger:dagger-compiler:2.0.1'
+	testCompile 'com.google.dagger:dagger:2.0.1'
+	testApt "com.google.dagger:dagger-compiler:2.0.1"
+	testCompile 'javax.annotation:jsr250-api:1.0'
+
+	//Android Test
+	//Espresso
+	androidTestCompile 'com.android.support.test:runner:0.4'
+	androidTestCompile 'com.android.support.test:rules:0.4'
+	androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.1')
+			{
+				exclude group: 'com.google.code.findbugs', module: 'jsr305'
+			}
+	androidTestCompile 'com.android.support:support-annotations:23.1.1'
+	androidTestCompile 'com.android.support.test:runner:0.4.1'
+	androidTestCompile 'com.android.support.test:rules:0.4.1'
+
+	// Mockito
+	androidTestCompile "org.mockito:mockito-core:1.10.19"
+
+}
