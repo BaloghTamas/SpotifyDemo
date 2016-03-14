@@ -21,9 +21,9 @@ android {
 		}
 		release {
 			storeFile file("../SpotifyDemo.keystore")
-			storePassword "iOk45AsjHsFJiPwv0sa8xiOBlgjfiJZX"
+			storePassword System.getenv('STORE_PASSWORD')
 			keyAlias "SpotifyDemo"
-			keyPassword "zsQfBQwlRblZPXAo+SWacYs2CD7+C0iz"
+			keyPassword System.getenv('KEY_PASSWORD')
 		}
 	}
 	buildTypes {
@@ -46,6 +46,9 @@ android {
 		exclude 'META-INF/services/javax.annotation.processing.Processor'
 		exclude 'META-INF/LICENSE.txt'
 		exclude 'META-INF/NOTICE.txt'
+	}
+	lintOptions {
+		disable 'InvalidPackage'
 	}
 }
 
