@@ -1,0 +1,45 @@
+language: android
+android:
+  components:
+    - build-tools-23.0.1
+    - android-23
+    - android-21
+    - add-on
+    - extra
+    - platform-tools
+    - tools
+    - extra-google-google_play_services
+    - extra-google-m2repository
+    - extra-android-m2repository
+    - addon-google_apis-google-19
+    - sys-img-armeabi-v7a-android-21
+
+env:
+  global:
+    # Add this
+    - MALLOC_ARENA_MAX=2
+
+sudo: required
+
+before_script:
+  # Create and start emulator
+  - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a -s "768x1280"
+  - emulator -avd test -no-skin -no-audio -no-window &
+  - adb wait-for-device
+  - adb shell input keyevent 82 &
+
+script: ./gradlew :app-mvp-dagger:build :app-mvp-dagger:connectedDebugAndroidTest
+
+deploy:
+  provider: releases
+  api_key: $GITHUB_KEY
+  file: app-mvp-dagger/build/outputs/apk/app-mvp-dagger-release.apk
+  skip_cleanup: true
+  on:
+    tags: true
+
+notifications:
+  email:
+    recipients:
+    - bataritosz@gmail.com
+    on_failure: always
