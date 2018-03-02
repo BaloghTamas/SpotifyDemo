@@ -1,7 +1,7 @@
 language: android
 android:
   components:
-    - build-tools-27.1.0
+    - build-tools-26.0.2
     - android-27
     - android-21
     - add-on
