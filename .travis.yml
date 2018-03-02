@@ -1,8 +1,8 @@
 language: android
 android:
   components:
-    - build-tools-23.0.1
-    - android-23
+    - build-tools-26.0.2
+    - android-27
     - android-21
     - add-on
     - extra
@@ -20,6 +20,9 @@ env:
     - MALLOC_ARENA_MAX=2
 
 sudo: required
+
+before_install:
+  - yes | sdkmanager "platforms;android-27"
 
 before_script:
   # Create and start emulator

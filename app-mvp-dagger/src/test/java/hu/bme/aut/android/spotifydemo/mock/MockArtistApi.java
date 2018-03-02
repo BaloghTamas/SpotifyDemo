@@ -17,8 +17,8 @@ import retrofit2.http.Query;
 
 public class MockArtistApi implements ArtistsApi {
 	@Override
-	public Call<ArtistsResult> getArtists(@Query("query") String artist, @Query("type") String type, @Query("offset") int offset, @Query("limit") int limit) {
-		final ArtistsResult artistsResult = new ArtistsResult();
+    public Call<ArtistsResult> getArtists(String authorisation, @Query("query") String artist, @Query("type") String type, @Query("offset") int offset, @Query("limit") int limit) {
+        final ArtistsResult artistsResult = new ArtistsResult();
 		Artists artists = new Artists();
 
 		List<Item> items = new ArrayList<Item>();
@@ -79,6 +79,5 @@ public class MockArtistApi implements ArtistsApi {
 
 		return call;
 	}
-
 
 }

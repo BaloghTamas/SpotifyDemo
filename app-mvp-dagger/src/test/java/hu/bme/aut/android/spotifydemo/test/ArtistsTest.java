@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.util.List;
@@ -12,15 +13,14 @@ import java.util.List;
 import hu.bme.aut.android.spotifydemo.BuildConfig;
 import hu.bme.aut.android.spotifydemo.ui.artists.ArtistsPresenter;
 import hu.bme.aut.android.spotifydemo.ui.artists.ArtistsScreen;
-import hu.bme.aut.android.spotifydemo.utils.RobolectricDaggerTestRunner;
 
 import static hu.bme.aut.android.spotifydemo.TestHelper.setTestInjector;
 import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-@RunWith(RobolectricDaggerTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@RunWith(RobolectricTestRunner.class)
+@Config(constants = BuildConfig.class)
 public class ArtistsTest {
 
 	private ArtistsPresenter artistsPresenter;
