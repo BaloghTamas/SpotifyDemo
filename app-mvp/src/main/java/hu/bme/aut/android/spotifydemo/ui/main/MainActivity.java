@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import butterknife.ButterKnife;
 import hu.bme.aut.android.spotifydemo.R;
 import hu.bme.aut.android.spotifydemo.ui.artists.ArtistsActivity;
 
@@ -20,12 +19,10 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		ButterKnife.bind(this);
 
+		etArtist = findViewById(R.id.etArtist);
 
-		etArtist = (EditText) findViewById(R.id.etArtist);
-
-		Button btnShowSongs = (Button) findViewById(R.id.btnShowArtists);
+		Button btnShowSongs = findViewById(R.id.btnShowArtists);
 		btnShowSongs.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

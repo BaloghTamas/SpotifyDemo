@@ -1,8 +1,8 @@
 language: android
 android:
   components:
-    - build-tools-26.0.2
-    - android-27
+    - build-tools-28.0.3
+    - android-28
     - android-21
     - add-on
     - extra
@@ -11,7 +11,7 @@ android:
     - extra-google-google_play_services
     - extra-google-m2repository
     - extra-android-m2repository
-    - addon-google_apis-google-19
+    - addon-google_apis-google-28
     - sys-img-armeabi-v7a-android-21
 
 env:
@@ -22,12 +22,12 @@ env:
 sudo: required
 
 before_install:
-  - yes | sdkmanager "platforms;android-27"
+  - yes | sdkmanager "platforms;android-28"
 
 before_script:
   # Create and start emulator
   - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a -s "768x1280"
-  - emulator -avd test -no-skin -no-audio -no-window &
+  - emulator -avd test -no-audio -no-window &
   - adb wait-for-device
   - adb shell input keyevent 82 &
 
@@ -44,5 +44,5 @@ deploy:
 notifications:
   email:
     recipients:
-    - bataritosz@gmail.com
+    - emailaddress@yourdomain.com
     on_failure: always

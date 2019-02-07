@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/BaloghTamas/SpotifyDemo.svg?branch=master)](https://travis-ci.org/BaloghTamas/SpotifyDemo)
 
-Spotify Demo app v1.2, using Spotify artists API.
+Spotify Demo app v1.3(4), using Spotify artists API.
 This is a fork of *peekler/MobileSoftwareSystems*, with an altered folder structure, demonstrating Travis-CI integration.
 
 Features demonstrated:
