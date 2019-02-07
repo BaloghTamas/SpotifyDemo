@@ -6,11 +6,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 import java.util.List;
 
-import hu.bme.aut.android.spotifydemo.BuildConfig;
+import javax.inject.Inject;
+
+import hu.bme.aut.android.spotifydemo.DaggerTestComponent;
 import hu.bme.aut.android.spotifydemo.ui.artists.ArtistsPresenter;
 import hu.bme.aut.android.spotifydemo.ui.artists.ArtistsScreen;
 
@@ -20,35 +21,33 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class)
 public class ArtistsTest {
+    @Inject
+    ArtistsPresenter artistsPresenter;
+    private ArtistsScreen artistsScreen;
 
-	private ArtistsPresenter artistsPresenter;
-	private ArtistsScreen artistsScreen;
-	private String query;
+    @Before
+    public void setup() {
+        DaggerTestComponent injector = setTestInjector();
+        injector.inject(this);
+        artistsScreen = mock(ArtistsScreen.class);
+        artistsPresenter.attachScreen(artistsScreen);
+    }
 
-	@Before
-	public void setup() throws Exception {
-		setTestInjector();
-		artistsScreen = mock(ArtistsScreen.class);
-		artistsPresenter = new ArtistsPresenter();
-		artistsPresenter.attachScreen(artistsScreen);
-	}
+    @Test
+    public void testArtists() {
+        String query = "AC/DC";
+        artistsPresenter.refreshArtists(query);
 
-	@Test
-	public void testArtists() {
-		query = "AC/DC";
-		artistsPresenter.refreshArtists(query);
-
-		ArgumentCaptor<List> artistCaptor = ArgumentCaptor.forClass(List.class);
-		verify(artistsScreen).showArtists(artistCaptor.capture());
-		assertTrue(artistCaptor.getValue().size() > 0);
-	}
+        ArgumentCaptor<List> artistCaptor = ArgumentCaptor.forClass(List.class);
+        verify(artistsScreen).showArtists(artistCaptor.capture());
+        assertTrue(artistCaptor.getValue().size() > 0);
+    }
 
 
-	@After
-	public void tearDown() {
-		artistsPresenter.detachScreen();
-	}
+    @After
+    public void tearDown() {
+        artistsPresenter.detachScreen();
+    }
 
 }

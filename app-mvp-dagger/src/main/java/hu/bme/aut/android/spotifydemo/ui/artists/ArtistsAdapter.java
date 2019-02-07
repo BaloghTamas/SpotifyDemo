@@ -53,9 +53,9 @@ public class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ViewHold
 
 		public ViewHolder(View itemView) {
 			super(itemView);
-			ivImage = (ImageView) itemView.findViewById(R.id.ivImage);
-			tvName = (TextView) itemView.findViewById(R.id.tvName);
-			tvPopularity = (TextView) itemView.findViewById(R.id.tvPopularity);
+            ivImage = itemView.findViewById(R.id.ivImage);
+            tvName = itemView.findViewById(R.id.tvName);
+            tvPopularity = itemView.findViewById(R.id.tvPopularity);
 		}
 	}
 }

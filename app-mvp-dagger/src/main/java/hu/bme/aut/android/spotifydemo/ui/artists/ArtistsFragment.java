@@ -60,10 +60,10 @@ public class ArtistsFragment extends Fragment implements ArtistsScreen {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_artists, container, false);
-		etArtist = (EditText) view.findViewById(R.id.etArtist);
+        etArtist = view.findViewById(R.id.etArtist);
 		etArtist.setText(artist);
-		tvEmpty = (TextView) view.findViewById(R.id.tvEmpty);
-		recyclerViewArtists = (RecyclerView) view.findViewById(R.id.recyclerViewArtists);
+        tvEmpty = view.findViewById(R.id.tvEmpty);
+        recyclerViewArtists = view.findViewById(R.id.recyclerViewArtists);
 		LinearLayoutManager llm = new LinearLayoutManager(getContext());
 		llm.setOrientation(LinearLayoutManager.VERTICAL);
 		recyclerViewArtists.setLayoutManager(llm);
@@ -72,7 +72,7 @@ public class ArtistsFragment extends Fragment implements ArtistsScreen {
 		artistsAdapter = new ArtistsAdapter(getContext(), artistsList);
 		recyclerViewArtists.setAdapter(artistsAdapter);
 
-		swipeRefreshLayoutArtists = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayoutArtists);
+        swipeRefreshLayoutArtists = view.findViewById(R.id.swipeRefreshLayoutArtists);
 
 		swipeRefreshLayoutArtists.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 			@Override

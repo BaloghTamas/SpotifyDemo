@@ -2,7 +2,6 @@ package hu.bme.aut.android.spotifydemo.test;
 
 import android.content.Intent;
 import android.support.test.runner.AndroidJUnit4;
-import android.test.suitebuilder.annotation.LargeTest;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +20,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static hu.bme.aut.android.spotifydemo.utils.AndroidTestUtils.setTestInjector;
 import static org.hamcrest.Matchers.allOf;
 
-@LargeTest
 @RunWith(AndroidJUnit4.class)
 public class ArtistTest extends EspressoTest<ArtistsActivity> {
 
@@ -32,7 +30,7 @@ public class ArtistTest extends EspressoTest<ArtistsActivity> {
 	}
 
 	@Before
-	public void setUp() throws Exception {
+    public void setUp() {
 		setTestInjector();
 		Intent intentWithArtist = new Intent();
 		intentWithArtist.putExtra(MainActivity.KEY_ARTIST, ARTIST);

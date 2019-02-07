@@ -27,9 +27,9 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
 
 		SpotifyDemoApplication.injector.inject(this);
 
-		etArtist = (EditText) findViewById(R.id.etArtist);
+        etArtist = findViewById(R.id.etArtist);
 
-		Button btnShowSongs = (Button) findViewById(R.id.btnShowArtists);
+        Button btnShowSongs = findViewById(R.id.btnShowArtists);
 		btnShowSongs.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

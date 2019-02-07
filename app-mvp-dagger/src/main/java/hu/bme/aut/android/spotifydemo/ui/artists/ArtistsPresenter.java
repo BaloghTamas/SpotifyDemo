@@ -8,54 +8,53 @@ import java.util.concurrent.Executor;
 
 import javax.inject.Inject;
 
-import hu.bme.aut.android.spotifydemo.SpotifyDemoApplication;
 import hu.bme.aut.android.spotifydemo.di.Network;
 import hu.bme.aut.android.spotifydemo.interactor.artists.ArtistsInteractor;
 import hu.bme.aut.android.spotifydemo.interactor.artists.event.GetArtistsEvent;
 import hu.bme.aut.android.spotifydemo.ui.Presenter;
 
 public class ArtistsPresenter extends Presenter<ArtistsScreen> {
+    Executor networkExecutor;
+    ArtistsInteractor artistsInteractor;
 
-	@Inject
-	@Network
-	Executor networkExecutor;
+    @Inject
+    public ArtistsPresenter(@Network Executor networkExecutor, ArtistsInteractor artistsInteractor) {
+        this.networkExecutor = networkExecutor;
+        this.artistsInteractor = artistsInteractor;
+    }
 
-	@Inject
-	ArtistsInteractor artistsInteractor;
+    @Override
+    public void attachScreen(ArtistsScreen screen) {
+        super.attachScreen(screen);
+        EventBus.getDefault().register(this);
+    }
 
-	@Override
-	public void attachScreen(ArtistsScreen screen) {
-		super.attachScreen(screen);
-		SpotifyDemoApplication.injector.inject(this);
-		EventBus.getDefault().register(this);
-	}
+    @Override
+    public void detachScreen() {
+        EventBus.getDefault().unregister(this);
+        super.detachScreen();
+    }
 
-	@Override
-	public void detachScreen() {
-		EventBus.getDefault().unregister(this);
-		super.detachScreen();
-	}
+    public void refreshArtists(final String artistQuery) {
+        networkExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                artistsInteractor.getArtists(artistQuery);
+            }
+        });
+    }
 
-	public void refreshArtists(final String artistQuery) {
-		networkExecutor.execute(new Runnable() {
-			@Override
-			public void run() {
-				artistsInteractor.getArtists(artistQuery);
-			}
-		});
-	}
-
-	@Subscribe(threadMode = ThreadMode.MAIN)
-	public void onEventMainThread(final GetArtistsEvent event) {
-		if (event.getThrowable() != null) {
-			event.getThrowable().printStackTrace();
-			if (screen != null) {
-				screen.showNetworkError(event.getThrowable().getMessage());
-			}
-		} else {
-			if (screen != null) {
-				screen.showArtists(event.getArtists());
-			}
-		}
-	}
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(final GetArtistsEvent event) {
+        if (event.getThrowable() != null) {
+            event.getThrowable().printStackTrace();
+            if (screen != null) {
+                screen.showNetworkError(event.getThrowable().getMessage());
+            }
+        } else {
+            if (screen != null) {
+                screen.showArtists(event.getArtists());
+            }
+        }
+    }
 }

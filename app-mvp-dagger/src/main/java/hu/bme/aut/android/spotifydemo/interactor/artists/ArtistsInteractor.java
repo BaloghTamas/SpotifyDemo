@@ -19,13 +19,13 @@ import static hu.bme.aut.android.spotifydemo.network.NetworkConfig.TOKEN_CLIENT_
 
 public class ArtistsInteractor {
 
-	@Inject
 	ArtistsApi artistsApi;
-
-    @Inject
     TokenApi tokenApi;
 
-	public ArtistsInteractor() {
+    @Inject
+    public ArtistsInteractor(ArtistsApi artistsApi, TokenApi tokenApi) {
+        this.artistsApi = artistsApi;
+        this.tokenApi = tokenApi;
 		SpotifyDemoApplication.injector.inject(this);
 	}
 

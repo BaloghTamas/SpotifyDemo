@@ -2,7 +2,6 @@ package hu.bme.aut.android.spotifydemo.test;
 
 import android.content.Intent;
 import android.support.test.runner.AndroidJUnit4;
-import android.test.suitebuilder.annotation.LargeTest;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +19,6 @@ import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static hu.bme.aut.android.spotifydemo.utils.AndroidTestUtils.setTestInjector;
 
-@LargeTest
 @RunWith(AndroidJUnit4.class)
 public class MainTest extends EspressoTest<MainActivity> {
 
@@ -32,7 +30,7 @@ public class MainTest extends EspressoTest<MainActivity> {
 	}
 
 	@Before
-	public void setUp() throws Exception {
+    public void setUp() {
 		setTestInjector();
 		activityRule.launchActivity(new Intent());
 	}
